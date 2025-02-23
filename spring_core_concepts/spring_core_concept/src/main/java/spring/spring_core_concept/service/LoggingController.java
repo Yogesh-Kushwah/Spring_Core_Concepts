@@ -10,8 +10,17 @@ import spring.spring_core_concept.beans.EmployeeBean;
 @RequestMapping("/search")
 public class LoggingController {
 
+    //UC01
+
+    @GetMapping("/hello")
+    @ResponseBody
+    public String sayHelloUsingVSCode() {
+        return "Hello from BridgeLabz Using VSCode";
+    }
+
+
+
     //UC 02
-    //Add Logger to Log Messages Use Built In SLF4J – Simple Logging Framework
     // Create SLF4J Logger
     private static final Logger logger = LoggerFactory.getLogger(LoggingController.class);
 
@@ -22,4 +31,22 @@ public class LoggingController {
         return "Hello, " + name + "! Check logs for details.";
     }
 
+
+
+
+    //UC03
+
+    private final EmployeeBean employee;
+
+    @Autowired
+    public LoggingController(EmployeeBean employee) {
+        this.employee = employee;
+    }
+
+    // Fetch employee details
+    @GetMapping("/details")
+    public String getEmployeeDetails() {
+        logger.info("Fetching employee details.");
+        return "Employee Name: " + employee.getEmployeeName() + ", Department: " + employee.getDepartmentName();
+    }
 }
